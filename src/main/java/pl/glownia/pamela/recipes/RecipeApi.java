@@ -30,4 +30,9 @@ public class RecipeApi {
     void addRecipe(@RequestBody Recipe recipe) {
         cookbook.addRecipe(recipe);
     }
+
+    @PostMapping("/delete/{recipeId}")
+    public void deleteRecipe(@PathVariable Integer recipeId) {
+        cookbook.deleteRecipe(recipeId);
+    }
 }

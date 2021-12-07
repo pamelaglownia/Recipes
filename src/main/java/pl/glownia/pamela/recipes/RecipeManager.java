@@ -31,4 +31,8 @@ public class RecipeManager {
     void addRecipe(Recipe recipe) {
         cookbook.put(cookbook.size() + 1, recipe);
     }
+
+    void deleteRecipe(Integer recipeId) {
+        cookbook.entrySet().removeIf(element -> element.getKey().equals(recipeId));
+    }
 }
