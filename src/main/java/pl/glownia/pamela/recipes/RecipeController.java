@@ -3,26 +3,24 @@ package pl.glownia.pamela.recipes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/recipes")
-public class RecipeApi {
-    RecipeManager cookbook;
+public class RecipeController {
+    RecipeService cookbook;
 
     @Autowired
-    public RecipeApi(RecipeManager cookbook) {
-        this.cookbook = cookbook;
-    }
+    private RecipeService recipeService;
 
     @GetMapping("/all")
-    public HashMap<Integer, Recipe> getAllRecipes() {
-        return cookbook.getCookbook();
+    public List<Recipe> getAllRecipes() {
+        return recipeService.getCookbook();
     }
 
     @GetMapping("/{recipeId}")
-    public Optional<Recipe> getRecipeById(@PathVariable Integer recipeId) {
+    public Optional<Recipe> getRecipeById(@PathVariable Long recipeId) {
         return cookbook.getChosenRecipe(recipeId);
     }
 
@@ -32,7 +30,7 @@ public class RecipeApi {
     }
 
     @PostMapping("/delete/{recipeId}")
-    public void deleteRecipe(@PathVariable Integer recipeId) {
-        cookbook.deleteRecipe(recipeId);
+    void deleteRecipe(@PathVariable Long recipeId) {
+        recipeService.deleteRecipe(recipeId);
     }
 }
