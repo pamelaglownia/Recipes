@@ -14,10 +14,10 @@ public class Recipe {
     private String name;
     //    @NotBlank
     private String description;
-    private String[] ingredients;
-    private String[] directions;
+    private String ingredients;
+    private String directions;
 
-    public Recipe(String name, String description, String[] ingredients, String[] directions) {
+    public Recipe(String name, String description, String ingredients, String directions) {
 //    public Recipe(@NotBlank String name, @NotBlank String description, @NotEmpty(message = "Are you sure that recipe doesn't have ingredients?") String[] ingredients, @NotEmpty(message = "Recipe must have directions") String[] directions) {
         this.name = name;
         this.description = description;
@@ -40,11 +40,11 @@ public class Recipe {
         return description;
     }
 
-    public String[] getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 
-    public String[] getDirections() {
+    public String getDirections() {
         return directions;
     }
 
@@ -60,11 +60,11 @@ public class Recipe {
         this.description = description;
     }
 
-    public void setIngredients(String[] ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
-    public void setDirections(String[] directions) {
+    public void setDirections(String directions) {
         this.directions = directions;
     }
 }
