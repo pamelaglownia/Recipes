@@ -37,7 +37,7 @@ public class RecipeService {
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    void fillDababase() {
+    void fillDatabase() {
         addRecipe(new Recipe("Tea with lemon and honey", "Classical tea for autumn evenings", "water, tea bag, honey, slice of lemon",
                 "Boil the water, put tea bag into the cup. After removing tea bag add honey and lemon."));
         addRecipe(new Recipe("Hot chocolate", "Hot chocolate for cold winter", "Cocoa powder, milk, honey, chilli",
