@@ -1,9 +1,11 @@
-package pl.glownia.pamela.recipes;
+package pl.glownia.pamela.recipes.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import pl.glownia.pamela.recipes.model.Recipe;
+import pl.glownia.pamela.recipes.repository.RecipeRepository;
 
 import java.util.*;
 
@@ -24,15 +26,15 @@ public class RecipeService {
         return cookbook;
     }
 
-    public Optional<Recipe> getChosenRecipe(Long recipeId) {
-        return Optional.ofNullable(cookbook.stream().filter(element -> element.getId().equals(recipeId)).findFirst().orElseThrow(() -> new RuntimeException("Recipe doesn't exist.")));
+    public Optional<Recipe> getChosenRecipe(long recipeId) {
+        return Optional.ofNullable(cookbook.stream().filter(element -> element.getId() == (recipeId)).findFirst().orElseThrow(() -> new RuntimeException("Recipe doesn't exist.")));
     }
 
-    void addRecipe(Recipe recipe) {
-        recipeRepository.save(recipe);
+    public Recipe addRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
     }
 
-    void deleteRecipe(Long recipeId) {
+    public void deleteRecipe(Long recipeId) {
         recipeRepository.deleteById(recipeId);
     }
 

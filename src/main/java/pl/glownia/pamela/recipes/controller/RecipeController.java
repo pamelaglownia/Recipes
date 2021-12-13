@@ -1,8 +1,13 @@
-package pl.glownia.pamela.recipes;
+package pl.glownia.pamela.recipes.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.glownia.pamela.recipes.service.RecipeService;
+import pl.glownia.pamela.recipes.model.Recipe;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +30,9 @@ public class RecipeController {
     }
 
     @PostMapping("/add")
-    void addRecipe(@RequestBody Recipe recipe) {
-        cookbook.addRecipe(recipe);
+    ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe) {
+        Recipe createdRecipe = cookbook.addRecipe(recipe);
+        return new ResponseEntity<>(createdRecipe, HttpStatus.CREATED);
     }
 
     @PostMapping("/delete/{recipeId}")

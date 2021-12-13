@@ -1,24 +1,30 @@
-package pl.glownia.pamela.recipes;
+package pl.glownia.pamela.recipes.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    //    @NotBlank
+    private long id;
+
+    @NotBlank(message = "Recipe has to have name")
     private String name;
-    //    @NotBlank
+
+    @NotBlank(message = "Provide short recipe description")
     private String description;
+
+    @NotBlank(message = "Are you sure that recipe doesn't have ingredients?")
     private String ingredients;
+
+    @NotBlank(message = "Provide recipe direction")
     private String directions;
 
     public Recipe(String name, String description, String ingredients, String directions) {
-//    public Recipe(@NotBlank String name, @NotBlank String description, @NotEmpty(message = "Are you sure that recipe doesn't have ingredients?") String[] ingredients, @NotEmpty(message = "Recipe must have directions") String[] directions) {
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
@@ -28,7 +34,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
