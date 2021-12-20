@@ -27,14 +27,4 @@ public class RecipeService {
     public void deleteRecipe(long id) {
         recipeRepository.deleteById(id);
     }
-
-    @EventListener(ApplicationReadyEvent.class)
-    void fillDatabase() {
-        addRecipe(new Recipe("Tea with lemon and honey", "Classical tea for autumn evenings", "water, tea bag, honey, slice of lemon",
-                "Boil the water, put tea bag into the cup. Pour water. After removing tea bag add honey and lemon."));
-        addRecipe(new Recipe("Hot chocolate", "Hot chocolate for cold winter", "Cocoa powder, milk, honey, chilli",
-                "Place the milk, cocoa powder in a saucepan, and heat until warm. Add honey and chilli."));
-        addRecipe(new Recipe("Cheese sandwich with ketchup", "Simple sandwich for student", "bread, butter, cheese, ketchup",
-                "Spread butter on bread, put one slice of cheese, add ketchup on the top."));
-    }
 }

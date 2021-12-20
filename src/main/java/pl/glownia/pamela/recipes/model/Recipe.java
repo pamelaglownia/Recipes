@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
 public class Recipe {
@@ -14,6 +15,11 @@ public class Recipe {
 
     @NotBlank(message = "Recipe name can't be empty")
     private String name;
+
+    @NotBlank(message = "Fill the category of recipe")
+    private String category;
+
+    private LocalDateTime date;
 
     @NotBlank(message = "Provide short recipe description")
     private String description;
@@ -27,8 +33,10 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String name, String description, String ingredients, String directions) {
+    public Recipe(String name, String category, String description, String ingredients, String directions) {
         this.name = name;
+        this.category = category;
+        this.date = LocalDateTime.now();
         this.description = description;
         this.ingredients = ingredients;
         this.directions = directions;
@@ -48,6 +56,22 @@ public class Recipe {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public String getDescription() {
