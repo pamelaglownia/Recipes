@@ -1,8 +1,6 @@
 package pl.glownia.pamela.recipes.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import pl.glownia.pamela.recipes.model.Recipe;
 import pl.glownia.pamela.recipes.repository.RecipeRepository;
@@ -26,5 +24,9 @@ public class RecipeService {
 
     public void deleteRecipe(long id) {
         recipeRepository.deleteById(id);
+    }
+
+    public Iterable<Recipe> findByCategory(String category) {
+        return recipeRepository.findByCategoryIgnoreCase(category);
     }
 }
