@@ -26,7 +26,11 @@ public class RecipeService {
         recipeRepository.deleteById(id);
     }
 
-    public Iterable<Recipe> findByCategory(String category) {
+    public Iterable<Recipe> findRecipeByCategory(String category) {
         return recipeRepository.findByCategoryIgnoreCase(category);
+    }
+
+    public Iterable<Recipe> findRecipeByName(String name) {
+        return recipeRepository.findByNameContainingIgnoreCase(name);
     }
 }
