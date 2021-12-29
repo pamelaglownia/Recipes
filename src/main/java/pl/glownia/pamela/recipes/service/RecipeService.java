@@ -27,10 +27,10 @@ public class RecipeService {
     }
 
     public Iterable<Recipe> findRecipeByCategory(String category) {
-        return recipeRepository.findByCategoryIgnoreCase(category);
+        return recipeRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(category);
     }
 
     public Iterable<Recipe> findRecipeByName(String name) {
-        return recipeRepository.findByNameContainingIgnoreCase(name);
+        return recipeRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc(name);
     }
 }

@@ -25,7 +25,7 @@ public class Recipe {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationData;
+    private Date creationDate;
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificationDate;
