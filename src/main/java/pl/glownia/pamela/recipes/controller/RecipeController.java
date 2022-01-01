@@ -8,6 +8,7 @@ import pl.glownia.pamela.recipes.service.RecipeService;
 import pl.glownia.pamela.recipes.model.Recipe;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/recipes")
@@ -22,7 +23,7 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public Iterable<Recipe> getAllRecipes() {
+    public List<Recipe> getAllRecipes() {
         return recipeService.getCookbook();
     }
 
@@ -32,12 +33,12 @@ public class RecipeController {
     }
 
     @GetMapping("/search/{recipeCategory}")
-    public Iterable<Recipe> findRecipeByCategory(@PathVariable String recipeCategory) {
+    public List<Recipe> findRecipeByCategory(@PathVariable String recipeCategory) {
         return recipeService.findRecipeByCategory(recipeCategory);
     }
 
     @GetMapping("/search/")
-    public Iterable<Recipe> findRecipeByName(@RequestParam("name") String recipeName) {
+    public List<Recipe> findRecipeByName(@RequestParam("name") String recipeName) {
         return recipeService.findRecipeByName(recipeName);
     }
 
