@@ -19,7 +19,7 @@ public class RecipeService {
     }
 
     public Recipe getChosenRecipe(long id) {
-        return recipeRepository.findById(id).orElseThrow(()->new RecipeNotFoundException(id));
+        return recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(id));
     }
 
     public List<Recipe> getCookbook() {
@@ -31,10 +31,18 @@ public class RecipeService {
     }
 
     public List<Recipe> findRecipeByCategory(String category) {
-        return recipeRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(category);
+        List<Recipe> foundRecipes = recipeRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(category);
+        if (foundRecipes.isEmpty()) {
+            throw new RecipeBadRequestException();
+        }
+        return foundRecipes;
     }
 
     public List<Recipe> findRecipeByName(String name) {
-        return recipeRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc(name);
+        List<Recipe> foundRecipes = recipeRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc(name);
+        if (foundRecipes.isEmpty()) {
+            throw new RecipeBadRequestException();
+        }
+        return foundRecipes;
     }
 }
