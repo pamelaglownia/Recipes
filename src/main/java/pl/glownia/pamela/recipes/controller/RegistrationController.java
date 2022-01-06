@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.UserRepository;
 
+import javax.validation.Valid;
+
 @RestController
 public class RegistrationController {
     @Autowired
@@ -20,15 +22,15 @@ public class RegistrationController {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/api/register")
-    public void register(@RequestBody User user) {
+    public void register(@Valid @RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
     @GetMapping("/api/details")
-    public void getUserDetails(Authentication authentication) {
+    public String getUserDetails(Authentication authentication) {
         UserDetails details = (UserDetails) authentication.getPrincipal();
-        System.out.println("Username: " + details.getUsername());
-        System.out.println("User has authorities/roles: " + authentication.getAuthorities());
+        return "Username: " + details.getUsername() +
+                "\nUser has authorities/roles: " + authentication.getAuthorities();
     }
 }
