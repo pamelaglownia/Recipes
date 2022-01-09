@@ -1,7 +1,6 @@
 package pl.glownia.pamela.recipes.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,10 +11,13 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Recipe name can't be empty")
     private String name;
@@ -26,6 +28,7 @@ public class Recipe {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificationDate;
@@ -39,14 +42,24 @@ public class Recipe {
     @NotBlank(message = "Provide recipe direction")
     private String directions;
 
-    public Recipe() {
-    }
+    @ManyToOne
+            (cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",
+            referencedColumnName = "userId")
+    private User user;
 
-    public Recipe(String name, String category, String description, String ingredients, String directions) {
-        this.name = name;
-        this.category = category;
-        this.description = description;
-        this.ingredients = ingredients;
-        this.directions = directions;
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", creationDate=" + creationDate +
+                ", modificationDate=" + modificationDate +
+                ", description='" + description + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                ", directions='" + directions + '\'' +
+                ", user=" + user.getEmail() +
+                '}';
     }
 }
