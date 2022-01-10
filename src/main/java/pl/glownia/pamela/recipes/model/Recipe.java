@@ -47,19 +47,4 @@ public class Recipe {
     @JoinColumn(name = "user_id",
             referencedColumnName = "userId")
     private User user;
-
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", creationDate=" + creationDate +
-                ", modificationDate=" + modificationDate +
-                ", description='" + description + '\'' +
-                ", ingredients='" + ingredients + '\'' +
-                ", directions='" + directions + '\'' +
-                ", user=" + user.getEmail() +
-                '}';
-    }
 }

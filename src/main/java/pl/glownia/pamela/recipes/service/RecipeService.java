@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import pl.glownia.pamela.recipes.exception.RecipeBadRequestException;
 import pl.glownia.pamela.recipes.exception.RecipeNotFoundException;
 import pl.glownia.pamela.recipes.model.Recipe;
+import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.RecipeRepository;
+import pl.glownia.pamela.recipes.repository.UserRepository;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -14,7 +17,12 @@ public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
-    public Recipe addRecipe(Recipe recipe) {
+    @Autowired
+    private UserService userService;
+
+    public Recipe addRecipe(Recipe recipe, Principal principal) {
+        User user = userService.getByEmail(userService.getCurrentUser(principal));
+        recipe.setUser(user);
         return recipeRepository.save(recipe);
     }
 

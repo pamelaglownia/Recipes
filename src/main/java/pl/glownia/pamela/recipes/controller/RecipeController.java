@@ -8,6 +8,7 @@ import pl.glownia.pamela.recipes.service.RecipeService;
 import pl.glownia.pamela.recipes.model.Recipe;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -16,9 +17,9 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @PostMapping("/add")
-    public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe) {
-        Recipe createdRecipe = recipeService.addRecipe(recipe);
+    @PostMapping("/new")
+    public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe, Principal principal) {
+        Recipe createdRecipe = recipeService.addRecipe(recipe, principal);
         return new ResponseEntity<>(createdRecipe, HttpStatus.CREATED);
     }
 
@@ -43,8 +44,8 @@ public class RecipeController {
     }
 
     @PutMapping("/{recipeId}")
-    public ResponseEntity<Recipe> updateChosenRecipe(@PathVariable Long recipeId, @Valid @RequestBody Recipe recipe) {
-        Recipe updatedRecipe = recipeService.addRecipe(recipe);
+    public ResponseEntity<Recipe> updateChosenRecipe(@PathVariable Long recipeId, @Valid @RequestBody Recipe recipe, Principal principal) {
+        Recipe updatedRecipe = recipeService.addRecipe(recipe, principal);
         return new ResponseEntity<>(updatedRecipe, HttpStatus.CREATED);
     }
 
