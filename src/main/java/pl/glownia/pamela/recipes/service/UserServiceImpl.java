@@ -5,18 +5,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.glownia.pamela.recipes.UserDetailsImpl;
 import pl.glownia.pamela.recipes.model.User;
-import pl.glownia.pamela.recipes.repository.UserRepository;
+
 @Service
 public class UserServiceImpl implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(username);
-        if(user ==null){
+        User user = userService.getByEmail(username);
+        if (user == null) {
             throw new UsernameNotFoundException(username + " wasn't find.");
         }
         return new UserDetailsImpl(user);

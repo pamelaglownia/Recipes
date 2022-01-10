@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.UserRepository;
 
+import java.security.Principal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,10 @@ public class UserService {
 
     public Set<String> getAllUsers() {
         return userRepository.findAll().stream().map(User::getEmail).collect(Collectors.toSet());
+    }
+
+    public String getCurrentUser(Principal principal) {
+        return principal.getName();
     }
 
     public User getByEmail(String username) {

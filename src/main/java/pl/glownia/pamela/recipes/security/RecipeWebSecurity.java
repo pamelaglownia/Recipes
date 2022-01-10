@@ -3,19 +3,17 @@ package pl.glownia.pamela.recipes.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class RecipeWebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
@@ -28,14 +26,16 @@ public class RecipeWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .mvcMatchers("/api/recipes/all").hasAnyRole("USER", "ADMIN")
-//                .anyRequest().permitAll() //allow to access everyone in other requests
-//                .and()
-//                .formLogin()//add login form
-                .and()
-//                .logout();
+        http
                 .csrf().disable() //allow sending POST request using Postman
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/recipes/new").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/api/recipes/all").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/api/register").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/search").permitAll()
+                .mvcMatchers(HttpMethod.PUT, "/").hasRole("USER")
+                .mvcMatchers(HttpMethod.DELETE, "/").hasRole("USER")
+                .and()
                 .httpBasic();
     }
 
