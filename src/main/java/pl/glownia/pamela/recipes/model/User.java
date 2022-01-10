@@ -1,5 +1,6 @@
 package pl.glownia.pamela.recipes.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,19 +31,15 @@ public class User {
 
     @NotBlank
     @Size(min = 8, message = "Password should have minimum 8 characters.")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String role;
+
     @OneToMany(mappedBy = "user",
             fetch = FetchType.EAGER
     )
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Recipe> recipes = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", recipes=" + recipes +
-                '}';
-    }
 }
