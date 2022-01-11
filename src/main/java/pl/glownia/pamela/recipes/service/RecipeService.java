@@ -7,7 +7,6 @@ import pl.glownia.pamela.recipes.exception.RecipeNotFoundException;
 import pl.glownia.pamela.recipes.model.Recipe;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.RecipeRepository;
-import pl.glownia.pamela.recipes.repository.UserRepository;
 
 import java.security.Principal;
 import java.util.List;
@@ -26,12 +25,23 @@ public class RecipeService {
         return recipeRepository.save(recipe);
     }
 
-    public Recipe getChosenRecipe(long id) {
-        return recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(id));
+    public Recipe getChosenRecipe(long recipeId) {
+        return recipeRepository.findById(recipeId).orElseThrow(() -> new RecipeNotFoundException(recipeId));
     }
 
     public List<Recipe> getCookbook() {
         return recipeRepository.findAll();
+    }
+
+    public Recipe updateRecipe(long recipeId, Recipe recipe) {
+        Recipe modifyingRecipe = recipeRepository.findById(recipeId).orElseThrow(() -> new RecipeNotFoundException(recipeId));
+        modifyingRecipe.setName(recipe.getName());
+        modifyingRecipe.setCategory(recipe.getCategory());
+        modifyingRecipe.setModificationDate(recipe.getModificationDate());
+        modifyingRecipe.setDescription(recipe.getDescription());
+        modifyingRecipe.setIngredients(recipe.getIngredients());
+        modifyingRecipe.setDirections(recipe.getDirections());
+        return recipeRepository.save(modifyingRecipe);
     }
 
     public void deleteRecipe(long id) {

@@ -25,6 +25,7 @@ public class Recipe {
     @NotBlank(message = "Fill the category of recipe")
     private String category;
 
+    @Column(updatable = false)
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
