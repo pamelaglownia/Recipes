@@ -33,19 +33,23 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public Recipe updateRecipe(long recipeId, Recipe recipe) {
-        Recipe modifyingRecipe = recipeRepository.findById(recipeId).orElseThrow(() -> new RecipeNotFoundException(recipeId));
-        modifyingRecipe.setName(recipe.getName());
-        modifyingRecipe.setCategory(recipe.getCategory());
-        modifyingRecipe.setModificationDate(recipe.getModificationDate());
-        modifyingRecipe.setDescription(recipe.getDescription());
-        modifyingRecipe.setIngredients(recipe.getIngredients());
-        modifyingRecipe.setDirections(recipe.getDirections());
+    public Recipe updateRecipe(long recipeId, Recipe recipe, Principal principal) {
+        Recipe modifyingRecipe = getChosenRecipe(recipeId);
+        if (userService.isAuthorOfRecipe(recipe.getUser(), principal)) {
+            modifyingRecipe.setName(recipe.getName());
+            modifyingRecipe.setCategory(recipe.getCategory());
+            modifyingRecipe.setModificationDate(recipe.getModificationDate());
+            modifyingRecipe.setDescription(recipe.getDescription());
+            modifyingRecipe.setIngredients(recipe.getIngredients());
+            modifyingRecipe.setDirections(recipe.getDirections());
+        }
         return recipeRepository.save(modifyingRecipe);
     }
 
-    public void deleteRecipe(long id) {
-        recipeRepository.deleteById(id);
+    public void deleteRecipe(long id, Principal principal) {
+        if (userService.isAuthorOfRecipe(recipeRepository.getById(id).getUser(), principal)) {
+            recipeRepository.deleteById(id);
+        }
     }
 
     public List<Recipe> findRecipeByCategory(String category) {

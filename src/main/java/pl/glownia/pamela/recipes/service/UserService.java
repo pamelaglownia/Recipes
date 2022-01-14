@@ -2,6 +2,7 @@ package pl.glownia.pamela.recipes.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.glownia.pamela.recipes.exception.UserUnauthorizedException;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.UserRepository;
 
@@ -25,6 +26,13 @@ public class UserService {
 
     public String getCurrentUser(Principal principal) {
         return principal.getName();
+    }
+
+    public boolean isAuthorOfRecipe(User user, Principal principal) {
+        if (!user.getEmail().equals(getCurrentUser(principal))) {
+            throw new UserUnauthorizedException();
+        }
+        return true;
     }
 
     public User getByEmail(String username) {
