@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class RecipeBadRequestAdvice {
     @ResponseBody
-    @ExceptionHandler(RecipeBadRequestException.class)
+    @ExceptionHandler(RecipeBadRequestException.class) //when this exception occurs, Advice handle it
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleBadRequestException(RecipeBadRequestException exception) {
         return exception.getMessage();

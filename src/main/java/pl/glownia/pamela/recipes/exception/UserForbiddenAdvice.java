@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class UserUnauthorizedAdvice {
+public class UserForbiddenAdvice {
     @ResponseBody
-    @ExceptionHandler(UserUnauthorizedException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UserForbiddenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
 
-    public String handleUserUnauthorizedException(UserUnauthorizedException exception) {
+    public String handleUserForbiddenException(UserForbiddenException exception) {
         return exception.getMessage();
     }
 }
