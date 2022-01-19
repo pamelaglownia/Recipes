@@ -8,19 +8,23 @@ import pl.glownia.pamela.recipes.model.Recipe;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.RecipeRepository;
 
-import java.security.Principal;
 import java.util.List;
 
 @Service
 public class RecipeService {
+
+    private final RecipeRepository recipeRepository;
+
     @Autowired
-    private RecipeRepository recipeRepository;
+    public RecipeService(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
 
     @Autowired
     private UserService userService;
 
-    public Recipe addRecipe(Recipe recipe, Principal principal) {
-        User user = userService.getByEmail(userService.getCurrentUser(principal));
+    public Recipe addRecipe(Recipe recipe) {
+        User user = userService.getByEmail(userService.getCurrentUser());
         recipe.setUser(user);
         return recipeRepository.save(recipe);
     }
@@ -33,9 +37,9 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public Recipe updateRecipe(long recipeId, Recipe recipe, Principal principal) {
+    public Recipe updateRecipe(long recipeId, Recipe recipe) {
         Recipe modifyingRecipe = getChosenRecipe(recipeId);
-        if (userService.isAuthorOfRecipe(recipe.getUser(), principal)) {
+        if (userService.isAuthorOfRecipe(recipe.getUser())) {
             modifyingRecipe.setName(recipe.getName());
             modifyingRecipe.setCategory(recipe.getCategory());
             modifyingRecipe.setModificationDate(recipe.getModificationDate());
@@ -46,8 +50,8 @@ public class RecipeService {
         return recipeRepository.save(modifyingRecipe);
     }
 
-    public void deleteRecipe(long id, Principal principal) {
-        if (userService.isAuthorOfRecipe(recipeRepository.getById(id).getUser(), principal)) {
+    public void deleteRecipe(long id) {
+        if (userService.isAuthorOfRecipe(recipeRepository.getById(id).getUser())) {
             recipeRepository.deleteById(id);
         }
     }

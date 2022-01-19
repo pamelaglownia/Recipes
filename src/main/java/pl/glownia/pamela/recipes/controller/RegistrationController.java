@@ -7,7 +7,6 @@ import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.service.UserService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Set;
 
 @RestController
@@ -26,8 +25,8 @@ public class RegistrationController {
 
     @GetMapping("/api/user")
     @ResponseBody
-    public String getCurrentUser(Principal principal) {
-        return userService.getCurrentUser(principal);
+    public String getCurrentUser() {
+        return userService.getCurrentUser();
     }
 
     @GetMapping("/api/users/all")

@@ -8,7 +8,6 @@ import pl.glownia.pamela.recipes.model.Recipe;
 import pl.glownia.pamela.recipes.service.RecipeService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -18,8 +17,8 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @PostMapping("/new")
-    public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe, Principal principal) {
-        Recipe createdRecipe = recipeService.addRecipe(recipe, principal);
+    public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe) {
+        Recipe createdRecipe = recipeService.addRecipe(recipe);
         return new ResponseEntity<>(createdRecipe, HttpStatus.CREATED);
     }
 
@@ -44,13 +43,13 @@ public class RecipeController {
     }
 
     @PutMapping("/{recipeId}")
-    public ResponseEntity<Recipe> updateChosenRecipe(@PathVariable Long recipeId, @Valid @RequestBody Recipe recipe, Principal principal) {
-        Recipe updatedRecipe = recipeService.updateRecipe(recipeId, recipe, principal);
+    public ResponseEntity<Recipe> updateChosenRecipe(@PathVariable Long recipeId, @Valid @RequestBody Recipe recipe) {
+        Recipe updatedRecipe = recipeService.updateRecipe(recipeId, recipe);
         return new ResponseEntity<>(updatedRecipe, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{recipeId}")
-    public void deleteRecipe(@PathVariable Long recipeId, Principal principal) {
-        recipeService.deleteRecipe(recipeId, principal);
+    public void deleteRecipe(@PathVariable Long recipeId) {
+        recipeService.deleteRecipe(recipeId);
     }
 }
