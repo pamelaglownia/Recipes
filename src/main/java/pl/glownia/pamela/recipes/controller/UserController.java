@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.Set;
 
 @RestController
-public class RegistrationController {
+public class UserController {
     @Autowired
     UserService userService;
 
@@ -25,13 +25,13 @@ public class RegistrationController {
 
     @GetMapping("/api/user")
     @ResponseBody
-    public String getCurrentUser() {
-        return userService.getCurrentUser();
+    public String getCurrentUserEmail() {
+        return userService.getCurrentUserEmail();
     }
 
     @GetMapping("/api/users/all")
     @ResponseBody
-    public Set<String> getAllUsers() {
+    public Set<String> getAllUsersEmails() {
         return userService.getAllUsers();
     }
 }

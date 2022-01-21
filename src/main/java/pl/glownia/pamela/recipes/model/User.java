@@ -8,8 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user",
@@ -41,5 +41,5 @@ public class User {
             fetch = FetchType.EAGER
     )
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    List<Recipe> recipes = new ArrayList<>();
+    Set<Recipe> recipes = new HashSet<>();
 }

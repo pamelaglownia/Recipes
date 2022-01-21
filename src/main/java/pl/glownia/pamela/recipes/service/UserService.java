@@ -14,8 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User addUser(User user) {
         return userRepository.save(user);
@@ -25,13 +29,13 @@ public class UserService {
         return userRepository.findAll().stream().map(User::getEmail).collect(Collectors.toSet());
     }
 
-    public String getCurrentUser() {
+    public String getCurrentUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
 
     public boolean isAuthorOfRecipe(User user) {
-        if (!user.getEmail().equals(getCurrentUser())) {
+        if (!user.getEmail().equals(getCurrentUserEmail())) {
             throw new UserForbiddenException();
         }
         return true;
