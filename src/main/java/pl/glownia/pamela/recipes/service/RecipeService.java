@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.glownia.pamela.recipes.exception.RecipeBadRequestException;
 import pl.glownia.pamela.recipes.exception.RecipeNotFoundException;
+import pl.glownia.pamela.recipes.exception.UserWithoutRecipesException;
 import pl.glownia.pamela.recipes.model.Recipe;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.RecipeRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RecipeService {
@@ -24,7 +26,7 @@ public class RecipeService {
     private UserService userService;
 
     public Recipe addRecipe(Recipe recipe) {
-        User user = userService.getByEmail(userService.getCurrentUser());
+        User user = userService.getByEmail(userService.getCurrentUserEmail());
         recipe.setUser(user);
         return recipeRepository.save(recipe);
     }
@@ -68,6 +70,15 @@ public class RecipeService {
         List<Recipe> foundRecipes = recipeRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc(name);
         if (foundRecipes.isEmpty()) {
             throw new RecipeBadRequestException();
+        }
+        return foundRecipes;
+    }
+
+    public Set<Recipe> findAllUsersRecipe() {
+        User user = userService.getByEmail(userService.getCurrentUserEmail());
+        Set<Recipe> foundRecipes = recipeRepository.findByUser(user);
+        if (foundRecipes.isEmpty()) {
+            throw new UserWithoutRecipesException();
         }
         return foundRecipes;
     }
