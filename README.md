@@ -26,6 +26,10 @@ http://localhost:8080/api/recipes/search/beverage
 ```
 http://localhost:8080/api/recipes/search/?name=tea
 ```
+* find all current logged-in user's recipes:
+```
+http://localhost:8080/api/recipes/myrecipes
+```
 * add new recipe
 ```
 http://localhost:8080/api/recipes/new
