@@ -40,4 +40,20 @@ class UserServiceTest {
         User capturedUser = userArgumentCaptor.getValue();
         assertThat(capturedUser).isEqualTo(julia);
     }
+
+    @Test
+    void canGetAllUsers() {
+        //when
+        underTestService.getAllUsers();
+        //then
+        verify(userRepository).findAll();
+    }
+
+    @Test
+    void shouldFindUserByEmail() {
+        //when
+        underTestService.getByEmail("julia@gmail.com");
+        //then
+        verify(userRepository).getByEmail("julia@gmail.com");
+    }
 }
