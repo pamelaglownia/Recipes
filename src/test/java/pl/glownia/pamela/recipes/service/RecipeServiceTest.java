@@ -11,17 +11,25 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class) //instead of AutoCloseable
 class RecipeServiceTest {
-    @Mock
+    @Mock //we don't use Autowired real repo
     private RecipeRepository recipeRepository;
     private RecipeService underTestService;
 
     @BeforeEach
     void setUp() {
+//      autoCloseable = MockitoAnnotations.openMocks(this); - we don't need it because of annotation above class
         underTestService = new RecipeService(recipeRepository);
     }
+/*
+  * we don't need it because of annotation above class
+    @AfterEach
+    void tearDown() throws Exception {
+    autoCloseable.close(); //close resources after the test
+    }
+*/
 
     @Test
-    void getCookbook() {
+    void canGetCookbook() {
         //when
         underTestService.getCookbook();
         //then
