@@ -17,21 +17,21 @@ public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @PostMapping("/api/register")
+    @PostMapping("/api/registration")
     public void register(@Valid @RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addUser(user);
     }
 
-    @GetMapping("/api/user")
-    @ResponseBody
-    public String getCurrentUserEmail() {
-        return userService.getCurrentUserEmail();
-    }
-
-    @GetMapping("/api/users/all")
+    @GetMapping("/api/users")
     @ResponseBody
     public Set<String> getAllUsersEmails() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/api/users/current-user")
+    @ResponseBody
+    public String getCurrentUserEmail() {
+        return userService.getCurrentUserEmail();
     }
 }

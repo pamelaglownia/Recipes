@@ -12,50 +12,50 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/recipes")
+@RequestMapping("/api")
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @PostMapping("/new")
+    @PostMapping("/recipes/new-recipe")
     public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe) {
         Recipe createdRecipe = recipeService.addRecipe(recipe);
         return new ResponseEntity<>(createdRecipe, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/recipes")
     public List<Recipe> getAllRecipes() {
         return recipeService.getCookbook();
     }
 
-    @GetMapping("/{recipeId}")
+    @GetMapping("/recipes/{recipeId}")
     public Recipe getRecipeById(@PathVariable Long recipeId) {
         return recipeService.getChosenRecipe(recipeId);
     }
 
-    @GetMapping("/search/{recipeCategory}")
+    @GetMapping("/recipes/categories/{recipeCategory}")
     public List<Recipe> findRecipeByCategory(@PathVariable String recipeCategory) {
         return recipeService.findRecipeByCategory(recipeCategory);
     }
 
-    @GetMapping("/search/")
-    public List<Recipe> findRecipeByName(@RequestParam("name") String recipeName) {
+    @GetMapping("/recipes/names/{recipeName}")
+    public List<Recipe> findRecipeByName(@PathVariable String recipeName) {
         return recipeService.findRecipeByName(recipeName);
     }
 
-    @GetMapping("/myrecipes")
+    @GetMapping("/recipes/my-recipes")
     @ResponseBody
-    public Set<Recipe> getAllUsersRecipe(){
-        return recipeService.findAllUsersRecipe();
+    public Set<Recipe> getAllCurrentUsersRecipe() {
+        return recipeService.findAllCurrentUsersRecipe();
     }
 
-    @PutMapping("/{recipeId}")
+    @PutMapping("/recipes/{recipeId}")
     public ResponseEntity<Recipe> updateChosenRecipe(@PathVariable Long recipeId, @Valid @RequestBody Recipe recipe) {
         Recipe updatedRecipe = recipeService.updateRecipe(recipeId, recipe);
         return new ResponseEntity<>(updatedRecipe, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{recipeId}")
+    @DeleteMapping("/recipes/{recipeId}")
     public void deleteRecipe(@PathVariable Long recipeId) {
         recipeService.deleteRecipe(recipeId);
     }
