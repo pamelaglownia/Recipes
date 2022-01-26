@@ -1,4 +1,4 @@
-package pl.glownia.pamela.recipes.service;
+package pl.glownia.pamela.recipes.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,30 +8,26 @@ import pl.glownia.pamela.recipes.model.User;
 import java.util.Collection;
 import java.util.List;
 
-public class UserDetailsImpl implements UserDetails {
-    private final String email;
-    private final String password;
-    private final List<GrantedAuthority> rolesAndAuthorities;
+public class UserPrincipal implements UserDetails {
+    private final User user;
 
-    public UserDetailsImpl(User user) {
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.rolesAndAuthorities = List.of(new SimpleGrantedAuthority(user.getRole()));
+    public UserPrincipal(User user) {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return rolesAndAuthorities;
+        return List.of(new SimpleGrantedAuthority(user.getRole()));
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return user.getEmail();
     }
 
     @Override
@@ -52,5 +48,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
