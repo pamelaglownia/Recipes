@@ -74,7 +74,7 @@ public class RecipeService {
         return foundRecipes;
     }
 
-    public Set<Recipe> findAllUsersRecipe() {
+    public Set<Recipe> findAllCurrentUsersRecipe() {
         User user = userService.getByEmail(userService.getCurrentUserEmail());
         Set<Recipe> foundRecipes = recipeRepository.findByUser(user);
         if (foundRecipes.isEmpty()) {
