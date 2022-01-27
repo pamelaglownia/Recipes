@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @DataJpaTest
 class UserRepositoryTest {
     @Autowired
-    UserRepository underTestRepository;
+    private UserRepository underTestRepository;
 
     @AfterEach
     void tearDown() {
@@ -30,10 +30,10 @@ class UserRepositoryTest {
         underTestRepository.save(harry);
 
         //when
-        User expected = underTestRepository.getByEmail(email);
+        User testResult = underTestRepository.getByEmail(email);
 
         //then
-        assertThat(expected).isEqualTo(harry);
+        assertThat(testResult).isEqualTo(harry);
     }
 
     @Test
@@ -48,9 +48,9 @@ class UserRepositoryTest {
         underTestRepository.save(harry);
 
         //when
-        User expected = underTestRepository.getByEmail(email);
+        User testResult = underTestRepository.getByEmail(email);
 
         //then
-        assertThat(expected).isNotEqualTo(harry);
+        assertThat(testResult).isNotEqualTo(harry);
     }
 }

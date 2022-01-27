@@ -44,10 +44,10 @@ public class RecipeRepositoryTest {
         cookbook.add(winterCoffee);
 
         //when
-        List<Recipe> expected = underTestRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc("winter");
+        List<Recipe> testResult = underTestRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc("winter");
 
         //then
-        assertThat(expected).isEqualTo(cookbook);
+        assertThat(testResult).isEqualTo(cookbook);
     }
 
     @Test
@@ -69,10 +69,10 @@ public class RecipeRepositoryTest {
         cookbook.add(summerIceTea);
 
         //when
-        List<Recipe> expected = underTestRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc("winter");
+        List<Recipe> testResult = underTestRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc("winter");
 
         //then
-        assertThat(expected).isNotEqualTo(cookbook);
+        assertThat(testResult).isNotEqualTo(cookbook);
     }
 
     @Test
@@ -95,10 +95,10 @@ public class RecipeRepositoryTest {
         cookbook.add(winterCoffee);
 
         //when
-        List<Recipe> expected = underTestRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(recipeCategory);
+        List<Recipe> testResult = underTestRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(recipeCategory);
 
         //then
-        assertThat(expected).isEqualTo(cookbook);
+        assertThat(testResult).isEqualTo(cookbook);
     }
 
     @Test
@@ -121,10 +121,10 @@ public class RecipeRepositoryTest {
         cookbook.add(winterCoffee);
 
         //when
-        List<Recipe> expected = underTestRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc("food");
+        List<Recipe> testResult = underTestRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc("food");
 
         //then
-        assertThat(expected).isNotEqualTo(cookbook);
+        assertThat(testResult).isNotEqualTo(cookbook);
     }
 
     @Test
@@ -158,9 +158,9 @@ public class RecipeRepositoryTest {
         recipes.add(winterCoffee);
         recipes.add(iceCoffee);
         //when
-        Set<Recipe> expected = underTestRepository.findByUser(julia);
+        Set<Recipe> testResult = underTestRepository.findByUser(julia);
 
         //then
-        assertThat(expected).isEqualTo(recipes);
+        assertThat(testResult).isEqualTo(recipes);
     }
 }
