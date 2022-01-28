@@ -56,7 +56,7 @@ public class RecipeService {
     }
 
     public List<Recipe> findRecipeByCategory(String category) {
-        List<Recipe> foundRecipes = recipeRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(category);
+        List<Recipe> foundRecipes = recipeRepository.findByCategory(category);
         if (foundRecipes.isEmpty()) {
             throw new RecipeBadRequestException();
         }
@@ -64,7 +64,7 @@ public class RecipeService {
     }
 
     public List<Recipe> findRecipeByName(String name) {
-        List<Recipe> foundRecipes = recipeRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc(name);
+        List<Recipe> foundRecipes = recipeRepository.findByPartOfName(name);
         if (foundRecipes.isEmpty()) {
             throw new RecipeBadRequestException();
         }
