@@ -1,6 +1,5 @@
 package pl.glownia.pamela.recipes.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.glownia.pamela.recipes.exception.RecipeBadRequestException;
 import pl.glownia.pamela.recipes.exception.RecipeNotFoundException;
@@ -16,14 +15,12 @@ import java.util.Set;
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final UserService userService;
 
-    @Autowired
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, UserService userService) {
         this.recipeRepository = recipeRepository;
+        this.userService = userService;
     }
-
-    @Autowired
-    private UserService userService;
 
     public Recipe addRecipe(Recipe recipe) {
         User user = userService.getByEmail(userService.getCurrentUserEmail());

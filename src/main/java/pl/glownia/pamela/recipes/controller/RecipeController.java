@@ -14,8 +14,12 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api")
 public class RecipeController {
+    private final RecipeService recipeService;
+
     @Autowired
-    private RecipeService recipeService;
+    public RecipeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
 
     @PostMapping("/recipes/new-recipe")
     public ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe) {

@@ -10,8 +10,12 @@ import java.util.Set;
 
 @RestController
 public class UserController {
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/api/registration")
     public void register(@Valid @RequestBody User user) {
