@@ -9,7 +9,8 @@ Project's tasks come from JetBrains Academy.
 ### Features ###
 
 1. Only registered users can access recipes (email as username with at least 8 characters password).
-2. As a user you can: 
+2. To run application you can use one from the existing users (e.g. login: `user@gmail.com` password: `password123!`) or register new one.    
+3. As a user you can: 
 * read all recipes:
 ```
 http://localhost:8080/api/recipes/all
@@ -57,7 +58,8 @@ The most valuable concepts of this project (for me) are:
 - Spring Security,
 - SQL,
 - REST API,
-- HTTP basics.
+- HTTP basics,
+- unit testing basics (JUnit, Mockito).
 
 ### How to run project? ###
 
