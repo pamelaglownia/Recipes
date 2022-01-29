@@ -22,15 +22,11 @@ class UserRepositoryTest {
     void itShouldCheckIfUserWithChosenEmailExists() {
         //given
         String email = "harry@gmail.com";
-        User harry = User.builder()
-                .email(email)
-                .password("password456!")
-                .role("USER")
-                .build();
+        User harry = prepareData();
         underTestRepository.save(harry);
 
         //when
-        User testResult = underTestRepository.getByEmail(email);
+        User testResult = underTestRepository.findByEmail(email);
 
         //then
         assertThat(testResult).isEqualTo(harry);
@@ -40,17 +36,21 @@ class UserRepositoryTest {
     void itShouldCheckIfUserWithChosenEmailDoesNotExists() {
         //given
         String email = "polly@gmail.com";
-        User harry = User.builder()
+        User harry = prepareData();
+        underTestRepository.save(harry);
+
+        //when
+        User testResult = underTestRepository.findByEmail(email);
+
+        //then
+        assertThat(testResult).isNotEqualTo(harry);
+    }
+
+    private User prepareData() {
+        return User.builder()
                 .email("harry@gmail.com")
                 .password("password456!")
                 .role("USER")
                 .build();
-        underTestRepository.save(harry);
-
-        //when
-        User testResult = underTestRepository.getByEmail(email);
-
-        //then
-        assertThat(testResult).isNotEqualTo(harry);
     }
 }

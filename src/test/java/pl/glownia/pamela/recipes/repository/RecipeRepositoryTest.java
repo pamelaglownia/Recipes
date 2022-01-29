@@ -28,23 +28,13 @@ public class RecipeRepositoryTest {
     @Test
     void itShouldCheckIfRecipeWithChosenNameExists() {
         //given
-        User julia = User.builder()
-                .email("julia@gmail.com")
-                .password("pass123!")
-                .role("USER")
-                .build();
-        Recipe winterCoffee = Recipe.builder()
-                .name("Winter coffee")
-                .category("beverage")
-                .description("Simple coffee for cold winter")
-                .ingredients("coffee beans, , milk, cinnamon, honey, star anise, cloves")
-                .directions("Prepare coffee in your favourite cup, add milk, honey and all spices.").user(julia).build();
+        Recipe winterCoffee = prepareData();
         underTestRepository.save(winterCoffee);
         List<Recipe> cookbook = new ArrayList<>();
         cookbook.add(winterCoffee);
 
         //when
-        List<Recipe> testResult = underTestRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc("winter");
+        List<Recipe> testResult = underTestRepository.findByPartOfName("winter");
 
         //then
         assertThat(testResult).isEqualTo(cookbook);
@@ -69,7 +59,7 @@ public class RecipeRepositoryTest {
         cookbook.add(summerIceTea);
 
         //when
-        List<Recipe> testResult = underTestRepository.findByNameContainingIgnoreCaseOrderByCreationDateDesc("winter");
+        List<Recipe> testResult = underTestRepository.findByPartOfName("winter");
 
         //then
         assertThat(testResult).isNotEqualTo(cookbook);
@@ -79,23 +69,13 @@ public class RecipeRepositoryTest {
     public void itShouldCheckIfRecipeFromChosenCategoryExists() {
         //given
         String recipeCategory = "beverage";
-        User julia = User.builder()
-                .email("julia@gmail.com")
-                .password("pass123!")
-                .role("USER")
-                .build();
-        Recipe winterCoffee = Recipe.builder()
-                .name("Winter coffee")
-                .category(recipeCategory)
-                .description("Simple coffee for cold winter")
-                .ingredients("coffee beans, , milk, cinnamon, honey, star anise, cloves")
-                .directions("Prepare coffee in your favourite cup, add milk, honey and all spices.").user(julia).build();
+        Recipe winterCoffee = prepareData();
         underTestRepository.save(winterCoffee);
         List<Recipe> cookbook = new ArrayList<>();
         cookbook.add(winterCoffee);
 
         //when
-        List<Recipe> testResult = underTestRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc(recipeCategory);
+        List<Recipe> testResult = underTestRepository.findByCategory(recipeCategory);
 
         //then
         assertThat(testResult).isEqualTo(cookbook);
@@ -104,24 +84,13 @@ public class RecipeRepositoryTest {
     @Test
     void itShouldCheckIfRecipeFromChosenCategoryDoesNotExists() {
         //given
-        String recipeCategory = "beverage";
-        User julia = User.builder()
-                .email("julia@gmail.com")
-                .password("pass123!")
-                .role("USER")
-                .build();
-        Recipe winterCoffee = Recipe.builder()
-                .name("Winter coffee")
-                .category(recipeCategory)
-                .description("Simple coffee for cold winter")
-                .ingredients("coffee beans, , milk, cinnamon, honey, star anise, cloves")
-                .directions("Prepare coffee in your favourite cup, add milk, honey and all spices.").user(julia).build();
+        Recipe winterCoffee = prepareData();
         underTestRepository.save(winterCoffee);
         List<Recipe> cookbook = new ArrayList<>();
         cookbook.add(winterCoffee);
 
         //when
-        List<Recipe> testResult = underTestRepository.findByCategoryIgnoreCaseOrderByCreationDateDesc("food");
+        List<Recipe> testResult = underTestRepository.findByCategory("food");
 
         //then
         assertThat(testResult).isNotEqualTo(cookbook);
@@ -157,10 +126,25 @@ public class RecipeRepositoryTest {
 
         recipes.add(winterCoffee);
         recipes.add(iceCoffee);
+
         //when
         Set<Recipe> testResult = underTestRepository.findByUser(julia);
 
         //then
         assertThat(testResult).isEqualTo(recipes);
+    }
+
+    private Recipe prepareData() {
+        User julia = User.builder()
+                .email("julia@gmail.com")
+                .password("pass123!")
+                .role("USER")
+                .build();
+        return Recipe.builder()
+                .name("Winter coffee")
+                .category("beverage")
+                .description("Simple coffee for cold winter")
+                .ingredients("coffee beans, , milk, cinnamon, honey, star anise, cloves")
+                .directions("Prepare coffee in your favourite cup, add milk, honey and all spices.").user(julia).build();
     }
 }
