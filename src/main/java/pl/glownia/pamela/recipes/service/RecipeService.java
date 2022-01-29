@@ -8,6 +8,7 @@ import pl.glownia.pamela.recipes.model.Recipe;
 import pl.glownia.pamela.recipes.model.User;
 import pl.glownia.pamela.recipes.repository.RecipeRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +37,7 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
+    @Transactional
     public Recipe updateRecipe(long recipeId, Recipe recipe) {
         Recipe modifyingRecipe = getChosenRecipe(recipeId);
         if (userService.isAuthorOfRecipe(recipe.getUser())) {
