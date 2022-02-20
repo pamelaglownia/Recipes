@@ -13,41 +13,48 @@ Project's tasks come from JetBrains Academy.
 3. As a user you can: 
 * read all recipes:
 ```
-http://localhost:8080/api/recipes/all
+http://localhost:8080/api/recipes
 ```
 * find recipe by id:
 ```
-http://localhost:8080/api/recipes/7
+http://localhost:8080/api/recipes/2
 ```
 * find recipe by category
 ```
-http://localhost:8080/api/recipes/search/beverage
+http://localhost:8080/api/recipes/categories/beverage
 ```
 * find recipe by element of name
 ```
-http://localhost:8080/api/recipes/search/?name=tea
+http://localhost:8080/api/recipes/names/tea
 ```
 * find all current logged-in user's recipes:
 ```
-http://localhost:8080/api/recipes/myrecipes
+http://localhost:8080/api/recipes/my-recipes
 ```
 * add new recipe
 ```
-http://localhost:8080/api/recipes/new
+http://localhost:8080/api/recipes/new-recipe
 ```
-* modify chosen recipe by id
+* modify chosen recipe
 ```
-localhost:8080/api/recipes/7
+localhost:8080/api/recipes/2
 ```
 * delete chosen recipe
 ```
-http://localhost:8080/api/recipes/7
+http://localhost:8080/api/recipes/2
+```
+* register as user
+```
+http://localhost:8080/api/registration
 ```
 * check all registered users emails
 ```
-http://localhost:8080/api/users/all
+http://localhost:8080/api/users/
 ```
-
+* check current user's email
+```
+http://localhost:8080/api/users/current-user
+```
 
 ### Motivation ###
 
