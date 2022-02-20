@@ -1,4 +1,4 @@
-package pl.glownia.pamela.recipes.service;
+package pl.glownia.pamela.recipes.recipe;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,9 +7,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.glownia.pamela.recipes.model.Recipe;
-import pl.glownia.pamela.recipes.model.User;
-import pl.glownia.pamela.recipes.repository.RecipeRepository;
+import pl.glownia.pamela.recipes.user.User;
+import pl.glownia.pamela.recipes.user.UserService;
 
 import java.util.Optional;
 

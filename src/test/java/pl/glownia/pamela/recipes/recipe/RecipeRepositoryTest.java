@@ -1,11 +1,10 @@
-package pl.glownia.pamela.recipes.repository;
+package pl.glownia.pamela.recipes.recipe;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.glownia.pamela.recipes.model.Recipe;
-import pl.glownia.pamela.recipes.model.User;
+import pl.glownia.pamela.recipes.user.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;

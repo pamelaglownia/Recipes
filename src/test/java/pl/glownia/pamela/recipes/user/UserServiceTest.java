@@ -1,4 +1,4 @@
-package pl.glownia.pamela.recipes.service;
+package pl.glownia.pamela.recipes.user;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,8 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.glownia.pamela.recipes.model.User;
-import pl.glownia.pamela.recipes.repository.UserRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;

@@ -1,10 +1,9 @@
-package pl.glownia.pamela.recipes.repository;
+package pl.glownia.pamela.recipes.user;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.glownia.pamela.recipes.model.User;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

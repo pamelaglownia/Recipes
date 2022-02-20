@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.glownia.pamela.recipes.model.Recipe;
-import pl.glownia.pamela.recipes.service.RecipeService;
+import pl.glownia.pamela.recipes.recipe.Recipe;
+import pl.glownia.pamela.recipes.recipe.RecipeService;
 
 import javax.validation.Valid;
 import java.util.List;

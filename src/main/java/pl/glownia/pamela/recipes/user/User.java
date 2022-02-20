@@ -1,7 +1,8 @@
-package pl.glownia.pamela.recipes.model;
+package pl.glownia.pamela.recipes.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import pl.glownia.pamela.recipes.recipe.Recipe;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

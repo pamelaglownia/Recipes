@@ -1,12 +1,10 @@
-package pl.glownia.pamela.recipes.service;
+package pl.glownia.pamela.recipes.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.glownia.pamela.recipes.model.User;
-import pl.glownia.pamela.recipes.repository.UserRepository;
 import pl.glownia.pamela.recipes.security.UserPrincipal;
 
 @Service

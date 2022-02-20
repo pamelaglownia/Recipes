@@ -1,12 +1,11 @@
-package pl.glownia.pamela.recipes.service;
+package pl.glownia.pamela.recipes.recipe;
 
 import org.springframework.stereotype.Service;
 import pl.glownia.pamela.recipes.exception.RecipeBadRequestException;
 import pl.glownia.pamela.recipes.exception.RecipeNotFoundException;
 import pl.glownia.pamela.recipes.exception.UserWithoutRecipesException;
-import pl.glownia.pamela.recipes.model.Recipe;
-import pl.glownia.pamela.recipes.model.User;
-import pl.glownia.pamela.recipes.repository.RecipeRepository;
+import pl.glownia.pamela.recipes.user.User;
+import pl.glownia.pamela.recipes.user.UserService;
 
 import javax.transaction.Transactional;
 import java.util.List;

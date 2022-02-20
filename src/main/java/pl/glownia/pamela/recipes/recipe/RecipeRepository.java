@@ -1,10 +1,9 @@
-package pl.glownia.pamela.recipes.repository;
+package pl.glownia.pamela.recipes.recipe;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.glownia.pamela.recipes.model.Recipe;
-import pl.glownia.pamela.recipes.model.User;
+import pl.glownia.pamela.recipes.user.User;
 
 import java.util.List;
 import java.util.Set;

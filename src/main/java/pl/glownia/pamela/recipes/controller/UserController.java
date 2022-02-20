@@ -2,8 +2,8 @@ package pl.glownia.pamela.recipes.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.glownia.pamela.recipes.model.User;
-import pl.glownia.pamela.recipes.service.UserService;
+import pl.glownia.pamela.recipes.user.User;
+import pl.glownia.pamela.recipes.user.UserService;
 
 import javax.validation.Valid;
 import java.util.Set;
